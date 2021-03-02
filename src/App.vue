@@ -1,16 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div class="container">
+        <global-header :user="currentUser"></global-header>
+        <column-list :list="list"></column-list>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import ColumnList, { ColumnProps } from '@/components/ColumnList.vue'
+import GlobalHeader, { UserProps } from '@/components/layouts/GlobalHeader.vue'
+import { testData } from '@/utils/testData'
+
+const currentUser: UserProps = {
+  isLogin: true,
+  name: 'Oyxiaoxi'
+}
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    ColumnList,
+    GlobalHeader
+  },
+  setup () {
+    return {
+      list: testData,
+      currentUser
+    }
   }
 })
 </script>
@@ -22,6 +39,5 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
