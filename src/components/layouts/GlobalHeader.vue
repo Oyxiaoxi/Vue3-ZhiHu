@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-dark bg-primary justify-content-between mb-4 px-4">
-    <a class="navbar-brand" href="#">者也专栏</a>
+    <router-link class="navbar-brand" to="/">者也专栏</router-link>
     <ul v-if="!user.isLogin" class="list-inline mb-0">
-      <li class="list-inline-item"><a href="#" class="btn btn-outline-light my-2">登陆</a></li>
-      <li class="list-inline-item"><a href="#" class="btn btn-outline-light my-2">注册</a></li>
+      <li class="list-inline-item"><router-link to="/login" class="btn btn-outline-light my-2">登陆</router-link></li>
+      <li class="list-inline-item"><router-link to="/login" class="btn btn-outline-light my-2">注册</router-link></li>
     </ul>
     <ul v-else class="list-inline mb-0">
       <li class="list-inline-item">
@@ -19,8 +19,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Dropdown from '@/components/layouts/Dropdown.vue'
-import DropdownItem from '@/components/layouts/DropdownItem.vue'
+import Dropdown from '@/components/Dropdown.vue'
+import DropdownItem from '@/components/DropdownItem.vue'
 
 export interface UserProps {
   isLogin: boolean;

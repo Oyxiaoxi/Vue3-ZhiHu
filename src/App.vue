@@ -1,31 +1,30 @@
 <template>
-    <div class="container">
-        <global-header :user="currentUser"></global-header>
-        <column-list :list="list"></column-list>
-    </div>
+  <div class="container">
+    <global-header :user="currentUser"></global-header>
+    <router-view></router-view>
+    <global-footer></global-footer>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import ColumnList, { ColumnProps } from '@/components/ColumnList.vue'
 import GlobalHeader, { UserProps } from '@/components/layouts/GlobalHeader.vue'
-import { testData } from '@/utils/testData'
+import GlobalFooter from '@/components/layouts/GlobalFooter.vue'
 
 const currentUser: UserProps = {
-  isLogin: true,
+  isLogin: false,
   name: 'Oyxiaoxi'
 }
 
 export default defineComponent({
   name: 'App',
   components: {
-    ColumnList,
-    GlobalHeader
+    GlobalHeader,
+    GlobalFooter
   },
   setup () {
     return {
-      list: testData,
       currentUser
     }
   }

@@ -12,11 +12,11 @@
 <script lang="ts">
 import { defineComponent, onUnmounted } from 'vue'
 import mitt from 'mitt'
+
 type ValidateFunc = () => boolean
 
 export const emitter = mitt()
 export default defineComponent({
-  name: 'ValidateForm',
   emits: ['form-submit'],
   setup (props, context) {
     let funcArr: ValidateFunc[] = []
@@ -24,17 +24,18 @@ export default defineComponent({
       const result = funcArr.map(func => func()).every(result => result)
       context.emit('form-submit', result)
     }
-    const callback = (func: ValidateFunc) => {
-      funcArr.push(func)
+    const callback = (func?: ValidateFunc) => {
+      if (func) {
+        funcArr.push(func)
+      }
     }
-    emitter.on('from-item-created', callback)
+    emitter.on('form-item-created', callback)
     onUnmounted(() => {
-      emitter.off('from-item-created', callback)
+      emitter.off('form-item-created', callback)
       funcArr = []
     })
     return {
-      submitForm,
-      callback
+      submitForm
     }
   }
 })
