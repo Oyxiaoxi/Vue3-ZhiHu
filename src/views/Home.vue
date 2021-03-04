@@ -24,8 +24,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
-import { testData } from '@/utils/testData'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '@/store/store'
 import ColumnList from '@/components/ColumnList.vue'
 
 export default defineComponent({
@@ -34,8 +35,10 @@ export default defineComponent({
     ColumnList
   },
   setup () {
+    const store = useStore<GlobalDataProps>()
+    const list = computed(() => store.state.columns)
     return {
-      list: testData
+      list
     }
   }
 })
